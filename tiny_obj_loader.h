@@ -10,6 +10,10 @@
 #include <vector>
 #include <map>
 
+#ifndef TOL_DONT_USE_ARRAYS
+  #include "to_arrays.h"
+#endif
+
 namespace tinyobj {
 
 typedef struct {
