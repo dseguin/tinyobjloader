@@ -111,6 +111,47 @@ void obj_get_index(unsigned int* index, obj_model* model, int part)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+// Loads vertex data from 'model' to 'vertarray'. The 'part' specifies which 
+// vertex group (or part) of the model to access. If the model is only one 
+// part, part == 0.
+//
+//       vertarray  --  array to hold vertex and attributes data
+//       model      --  model that contains obj data
+//       part       --  vertex group of model
+//
+// This particular function only loads vertices (V3f). That means 'vertarray' 
+// needs to hold the model's vertex positions, or 
+// "model->shapes[part].mesh.positions.size()". The vertices are stored in 
+// this order: V0x, V0y, V0z, V1x, V1y, ...
+///////////////////////////////////////////////////////////////////////////////
+void obj_get_v(float* vertarray, obj_model* model, int part)
+{
+	bool err_exit = false;
+	if(vertarray == NULL || model == NULL)
+	{
+		std::cerr << "Error: NULL arg passed to obj_get_v()" 
+			<< std::endl;
+		err_exit = true;
+	}
+	if((size_t)part > model->shapes.size() - 1 || part < 0)
+	{
+		std::cerr << "Error: arg 'int' passed to obj_get_v() "
+			"is larger than model.shapes.size(), or is negative" << std::endl;
+		err_exit = true;
+	}
+	if(!err_exit)
+	{
+		for (size_t f = 0; 
+				f < (model->shapes[part].mesh.positions.size())/3; ++f)
+		{
+			vertarray[f*3] = model->shapes[part].mesh.positions[f*3];
+			vertarray[f*3+1] = model->shapes[part].mesh.positions[f*3+1];
+			vertarray[f*3+2] = model->shapes[part].mesh.positions[f*3+2];
+		}
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
 // Loads vertex and attribute data from 'model' to 'vertarray'. The 'part' 
 // specifies which vertex group (or part) of the model to access. If the model 
 // is only one part, part == 0.
@@ -119,23 +160,23 @@ void obj_get_index(unsigned int* index, obj_model* model, int part)
 //       model      --  model that contains obj data
 //       part       --  vertex group of model
 //
-// This particular function loads normals and vertices (N3f & V3f). That means 
-// 'vertarray' needs to hold 'model's normals and vertex positions, or 
-// 2 * model->shapes[part].mesh.positions.size(). The attributes are 
-// interleaved in this order: N0x, N0y, N0z, V0x, V0y, V0z, N1x, N1y, ...
+// This particular function loads vertices and normals (V3f & N3f). That means 
+// 'vertarray' needs to hold the model's normals and vertex positions, or 
+// "2 * model->shapes[part].mesh.positions.size()". The attributes are 
+// interleaved in this order: V0x, V0y, V0z, N0x, N0y, N0z, V1x, V1y, ...
 ///////////////////////////////////////////////////////////////////////////////
-void obj_get_nv(float* vertarray, obj_model* model, int part)
+void obj_get_vn(float* vertarray, obj_model* model, int part)
 {
 	bool err_exit = false;
 	if(vertarray == NULL || model == NULL)
 	{
-		std::cerr << "Error: NULL arg passed to obj_get_nv()" 
+		std::cerr << "Error: NULL arg passed to obj_get_vn()" 
 			<< std::endl;
 		err_exit = true;
 	}
 	if((size_t)part > model->shapes.size() - 1 || part < 0)
 	{
-		std::cerr << "Error: arg 'int' passed to obj_get_nv() "
+		std::cerr << "Error: arg 'int' passed to obj_get_vn() "
 			"is larger than model.shapes.size(), or is negative" << std::endl;
 		err_exit = true;
 	}
@@ -144,12 +185,12 @@ void obj_get_nv(float* vertarray, obj_model* model, int part)
 		for (size_t f = 0; f < model->shapes[part].mesh.normals.size() * 
 				2 - 5; f += 6)
 		{
-			vertarray[f] = model->shapes[part].mesh.normals[f/2];
-			vertarray[f+1] = model->shapes[part].mesh.normals[f/2+1];
-			vertarray[f+2] = model->shapes[part].mesh.normals[f/2+2];
-			vertarray[f+3] = model->shapes[part].mesh.positions[f/2+0];
-			vertarray[f+4] = model->shapes[part].mesh.positions[f/2+1];
-			vertarray[f+5] = model->shapes[part].mesh.positions[f/2+2];
+			vertarray[f] = model->shapes[part].mesh.positions[f/2];
+			vertarray[f+1] = model->shapes[part].mesh.positions[f/2+1];
+			vertarray[f+2] = model->shapes[part].mesh.positions[f/2+2];
+			vertarray[f+3] = model->shapes[part].mesh.normals[f/2+0];
+			vertarray[f+4] = model->shapes[part].mesh.normals[f/2+1];
+			vertarray[f+5] = model->shapes[part].mesh.normals[f/2+2];
 		}
 	}
 }
