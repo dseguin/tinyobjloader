@@ -1,8 +1,16 @@
 # tinyobjloader (Old-style GL edition)
 
+This is a fork of `tinyobjloader` by <a href="https://github.com/syoyo">syoyo</a>, modified to suit the old OpenGL style arrays used in buffer objects. This fork is mostly for my own use, but it may be useful to others.
+
+I'll be adding methods to load textures and materials as well.
+
 #### Usage
-```c_cpp
-// ...
+
+Add the .cpp files to your source directory and the `tinyloader` folder to your include directory. Just include `tinyloader/tiny_obj_loader.h` in your project.
+
+```cpp
+#include "tinyloader/tiny_obj_loader.h"
+
 tinyobj::obj_model object;
 tinyobj::obj_load_model(&object, "filename");
 int object_part = 0;
@@ -18,6 +26,14 @@ tinyobj::obj_get_v(vertex, &object, object_part);
 
 delete[] index;
 delete[] vertex;
+```
+
+If you just want to use the base `tinyloader` source, define TOL_DONT_USE_ARRAYS before including `tinyloader/tiny_obj_loader.h`.
+
+```cpp
+#define TOL_DONT_USE_ARRAYS
+#include "tinyloader/tiny_obj_loader.h"
+// ...
 ```
 
 ### Original description
