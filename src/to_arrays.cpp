@@ -8,17 +8,17 @@
 // Intended usage:
 //
 //  - Load obj data to obj_model struct:
-//       GLT::obj_model model;
-//       GLT::obj_load_model(&model, "filename.obj");
+//       tinyobj::obj_model model;
+//       tinyobj::obj_load_model(&model, "filename.obj");
 //
 //  - Load index data from obj_model:
 //       int part = 0;
 //       unsigned int index[model.shapes[part].mesh.indices.size()];
-//       GLT::obj_get_index(index, &model, part);
+//       tinyobj::obj_get_index(index, &model, part);
 //
 //  - Load vertex and attributes data from obj_model:
 //       float vertarray[model.shapes[part].mesh.positions.size() * 2];
-//       GLT::obj_get_nv(vertarray, &model, part);
+//       tinyobj::obj_get_nv(vertarray, &model, part);
 //
 ///////////////////////////////////////////////////////////////////////////////
 
