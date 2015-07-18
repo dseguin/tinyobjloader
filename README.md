@@ -6,10 +6,10 @@ I'll be adding methods to load textures and materials as well.
 
 #### Usage
 
-Add the .cpp files to your source directory and the `tinyobjloader` folder to your include directory. Just include `tinyloader/tiny_obj_loader.h` in your project.
+Add the .cpp files to your source directory and the `tinyobjloader` folder to your include directory. Just include `tinyobjloader/tiny_obj_loader.h` in your project.
 
 ```cpp
-#include "tinyloader/tiny_obj_loader.h"
+#include "tinyobjloader/tiny_obj_loader.h"
 
 tinyobj::obj_model object;
 tinyobj::obj_load_model(&object, "filename");
@@ -28,11 +28,11 @@ delete[] index;
 delete[] vertex;
 ```
 
-If you just want to use the base `tinyobjloader` source, define `TOL_DONT_USE_ARRAYS` before including `tinyloader/tiny_obj_loader.h`.
+If you just want to use the base `tinyobjloader` source, define `TOL_DONT_USE_ARRAYS` before including `tinyobjloader/tiny_obj_loader.h`.
 
 ```cpp
 #define TOL_DONT_USE_ARRAYS
-#include "tinyloader/tiny_obj_loader.h"
+#include "tinyobjloader/tiny_obj_loader.h"
 // ...
 ```
 
