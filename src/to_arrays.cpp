@@ -1,7 +1,7 @@
 #ifndef TOL_DONT_USE_ARRAYS
 
 #include <iostream>
-#include "tiny_obj_loader.h"
+#include "tinyobjloader/tiny_obj_loader.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // Abstracts tinyobj to make it easier to load wavefront models in OpenGL.

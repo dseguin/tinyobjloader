@@ -10,10 +10,6 @@
 #include <vector>
 #include <map>
 
-#ifndef TOL_DONT_USE_ARRAYS
-  #include "to_arrays.h"
-#endif
-
 namespace tinyobj {
 
 typedef struct {
@@ -94,5 +90,9 @@ std::string LoadObj(std::vector<shape_t> &shapes,       // [output]
 std::string LoadMtl(std::map<std::string, int> &material_map,
                     std::vector<material_t> &materials, std::istream &inStream);
 }
+
+#ifndef TOL_DONT_USE_ARRAYS
+  #include "tinyobjloader/to_arrays.h"
+#endif
 
 #endif // _TINY_OBJ_LOADER_H

@@ -1,2 +1,17 @@
-#Common folder for building objects
-build/
+# Vi backup files
+*.c~
+*.cc~
+*.cpp~
+*.h~
+*.hpp~
+*.md~
+*.m~
+*.mm~
+
+# Binaries
+*.o
+*.a
+*.lib
+*.so
+*.dll
+*.exe

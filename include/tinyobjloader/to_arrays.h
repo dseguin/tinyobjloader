@@ -2,7 +2,7 @@
 #define TO_ARRAYS_H
 
 #include <vector>
-#include "tiny_obj_loader.h"
+#include "tinyobjloader/tiny_obj_loader.h"
 
 namespace tinyobj
 {
