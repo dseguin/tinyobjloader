@@ -63,9 +63,10 @@ namespace tinyobj
 ///////////////////////////////////////////////////////////////////////////////
 void obj_load_model(obj_model* model, const char* filename)
 {
-	std::string load_err = tinyobj::LoadObj(model->shapes, model->materials, 
-			filename, NULL);
-	if(!load_err.empty())
+	std::string load_err;
+	bool success = tinyobj::LoadObj(model->shapes, model->materials, load_err, 
+			filename, NULL, false);
+	if(!success)
 	{
 		std::cerr << load_err << std::endl;
 	}
