@@ -101,17 +101,23 @@ typedef struct {
 
 typedef enum {
   triangulation = 1, // used whether triangulate polygon face in .obj
-  calculate_normals =
-      2, // used whether calculate the normals if the .obj normals are empty
+  calculate_normals = 2 // used whether calculate the normals if the .obj normals are empty
   // Some nice stuff here
 } load_flags_t;
 
 class float3 {
 public:
-  float3() : x(0.0f), y(0.0f), z(0.0f) {}
+  float3() {
+    coords_t.x = 0.0f;
+    coords_t.y = 0.0f;
+    coords_t.z = 0.0f;
+  }
 
-  float3(float coord_x, float coord_y, float coord_z)
-      : x(coord_x), y(coord_y), z(coord_z) {}
+  float3(float coord_x, float coord_y, float coord_z) {
+    coords_t.x = coord_x;
+    coords_t.y = coord_y;
+    coords_t.z = coord_z;
+  }
 
   float3(const float3 &from, const float3 &to) {
     coord[0] = to.coord[0] - from.coord[0];
@@ -120,9 +126,9 @@ public:
   }
 
   float3 crossproduct(const float3 &vec) {
-    float a = y * vec.z - z * vec.y;
-    float b = z * vec.x - x * vec.z;
-    float c = x * vec.y - y * vec.x;
+    float a = coords_t.y * vec.coords_t.z - coords_t.z * vec.coords_t.y;
+    float b = coords_t.z * vec.coords_t.x - coords_t.x * vec.coords_t.z;
+    float c = coords_t.x * vec.coords_t.y - coords_t.y * vec.coords_t.x;
     return float3(a, b, c);
   }
 
@@ -141,7 +147,7 @@ private:
     float coord[3];
     struct {
       float x, y, z;
-    };
+    } coords_t;
   };
 };
 
